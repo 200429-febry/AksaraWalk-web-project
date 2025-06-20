@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Order Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <style>
+        /* Your existing register.html CSS here */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('pre-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* Animasi Teks */
+        .title {
+            font-size: 2.5em;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            font-weight: 400;
+            color: #FFD700;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            animation: fadeInRight 1.5s ease-out;
+            margin-bottom: 20px;
+        }
+
+        /* Keyframes untuk animasi */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Desain Form */
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 12px;
+            width: 350px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .container h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            outline: none;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(45deg, #800080, #9400D3);
+            color: white;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #9400D3, #800080);
+            transform: scale(1.05);
+        }
+        .message { padding: 10px; margin-bottom: 15px; border-radius: 5px; font-weight: 500; }
+        .success { background-color: #28a745; color: white; }
+        .error { background-color: #dc3545; color: white; }
+    </style>
+</head>
+<body>
+    <h1 class="title">AksaraWalk</h1>
+    <h2 class="subtitle">Limited Edition Pre-Order</h2>
+
+    <div class="container">
+        <h2>Register New Account</h2>
+
+        <div id="statusMessage" class="message" style="display: none;"></div>
+
+        <form action="proses-registrasi.php" method="post">
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            <input type="text" name="phone" placeholder="Phone Number" required>
+            <button type="submit">Register</button>
+        </form>
+        <p style="margin-top: 15px; font-size: 0.9em; color: rgba(255,255,255,0.8);">Sudah punya akun? <a href="login.php" style="color: #FFD700; text-decoration: underline;">Login</a></p>
+    </div>
+
+    <script>
+        // JavaScript to display messages from URL parameters
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('status');
+            const error = urlParams.get('error');
+            const statusMessageDiv = document.getElementById('statusMessage');
+
+            if (statusMessageDiv) {
+                if (status === 'sukses') {
+                    statusMessageDiv.textContent = 'Registrasi Berhasil! Silakan Login di sini.';
+                    statusMessageDiv.classList.add('success');
+                    statusMessageDiv.style.display = 'block';
+                } else if (status === 'gagal') {
+                    statusMessageDiv.textContent = 'Registrasi Gagal: ' + (error || 'Terjadi kesalahan.');
+                    statusMessageDiv.classList.add('error');
+                    statusMessageDiv.style.display = 'block';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
